@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Function Generator Design Plan</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- Title -->
+<header>
+    <h1>Function Generator Design Plan</h1>
+    <p class="author">By Tungnath (Tuesday Tribe)</p>
+    <p class="date">Date: <script>document.write(new Date().toLocaleDateString());</script></p>
+</header>
+
+<!-- Abstract Section -->
+<section class="abstract">
+    <h2>Abstract</h2>
+    <p>This document outlines the design and development of a cost-effective, versatile function generator using the ESP32 microcontroller. The project addresses the demand for affordable signal-generation tools in educational and hobbyist electronics, often limited by the high costs of commercial function generators. The proposed function generator can generate sine, square, and triangle waveforms with a frequency range of up to 10 MHz, incorporating basic AM/FM modulation features. Its modular and user-friendly design ensures adaptability for various applications, including educational use, prototyping, testing, debugging, and integration into IoT and medical devices. The project emphasizes cost-efficiency and practicality by utilizing readily available components, providing a valuable tool for students, hobbyists, and small-scale developers.</p>
+</section>
+
+<!-- Table of Contents Section -->
+<section class="toc">
+    <h2>Table of Contents</h2>
+    <ul>
+        <li><a href="#motivation">Motivation</a></li>
+        <li><a href="#overview">Overview of the Proposed Design</a></li>
+        <li><a href="#mindmap">Mind Map</a></li>
+        <li><a href="#blockdiagram">Block Diagram</a></li>
+        <li><a href="#projectsteps">Detailed Project Steps</a></li>
+        <li><a href="#components">Components</a></li>
+        <li><a href="#costcutting">Cost-Cutting and Final Notes</a></li>
+        <li><a href="#summary">Summary</a></li>
+    </ul>
+</section>
+
+<!-- Motivation Section -->
+<section id="motivation">
+    <h2>Motivation</h2>
+    <p>The development of a versatile and cost-effective F.G. addresses the growing demand for affordable tools in educational and hobbyist electronics projects. Commercial F.G.s are often expensive, making them inaccessible to students and enthusiasts. Using readily available components such as ESP32, this project aims to create a customizable, user-friendly device capable of generating a wide range of waveforms. This F.G. provides a practical platform for understanding signal generation and processing while offering flexibility for various applications such as testing, debugging, and experimental setups in electronics. Its modular design ensures adaptability and ease of integration with other tools, fostering innovation and creativity in the electronics community.</p>
+    
+    <h3>Real-Life Applications</h3>
+    <ul>
+        <li><strong>Educational Use:</strong> F.G.s play a critical role in demonstrating signal behavior, analyzing electronic circuits, and fostering a deeper understanding of communication systems.</li>
+        <li><strong>Hobbyist and Maker Communities:</strong> A compact and affordable function generator allows hobbyists to experiment with new ideas and push the boundaries of innovation.</li>
+        <li><strong>Testing and Debugging:</strong> Engineers rely on F.G.s to test circuits such as amplifiers, filters, and power supplies.</li>
+        <li><strong>Prototyping and Research:</strong> Researchers benefit from customizable waveform generators to design, simulate, and analyze systems.</li>
+        <li><strong>Medical Devices and Instrumentation:</strong> In medical electronics, FGs are used for biosignal processing systems and instrumentation for diagnostics and therapy.</li>
+        <li><strong>IoT and Embedded Systems:</strong> This device is vital for small-scale developers in IoT device testing and signal integrity.</li>
+    </ul>
+</section>
+
+<!-- Mind Map Section -->
+<section id="mindmap">
+    <h2>Mind Map</h2>
+    <img src="mindmapelp.png" alt="Mind Map" class="image">
+</section>
+
+<!-- Overview of Proposed Design -->
+<section id="overview">
+    <h2>Overview of the Proposed Design</h2>
+    <ul>
+        <li><strong>Signal Generation:</strong> The ESP32 microcontroller, programmed using the Arduino IDE, will generate sine, square, and triangle waveforms.</li>
+        <li><strong>Frequency Range:</strong> Usable waveforms up to around 6 MHz to 10 MHz with some filtering and buffering.</li>
+        <li><strong>Modulation:</strong>
+            <ul>
+                <li><strong>FM-like effect:</strong> By rapidly updating the ESP32's frequency parameters in software.</li>
+                <li><strong>AM-like effect:</strong> Using an external circuit or toggling output amplitude registers.</li>
+            </ul>
+        </li>
+        <li><strong>Output Buffer/Amplification:</strong> A simple op amp or transistor stage to provide stable amplitude and offset.</li>
+        <li><strong>Frequency Display:</strong> A small 16x2 LCD or 0.96" OLED for showing the output frequency and the waveform type.</li>
+        <li><strong>Basic Frequency Counter (Optional):</strong> Measuring signals up to ~6--8 MHz directly with an Arduino.</li>
+    </ul>
+</section>
+
+<!-- Block Diagram Section -->
+<section id="blockdiagram">
+    <h2>Block Diagram</h2>
+    <img src="image1.png" alt="Block Diagram Front View" class="image">
+    <img src="image2.png" alt="Block Diagram Side View" class="image">
+    <img src="image3.png" alt="Block Diagram Top View" class="image">
+    <img src="image4.png" alt="Block Diagram Corner View" class="image">
+</section>
+
+<!-- Detailed Project Steps -->
+<section id="projectsteps">
+    <h2>Detailed Project Steps</h2>
+    <h3>ESP32 Selection and Preparation</h3>
+    <ul>
+        <li>Select an ESP32.</li>
+        <li>Familiarize with Arduino IDE for programming.</li>
+    </ul>
+
+    <h3>Output Buffer / Amplifier Stage</h3>
+    <ul>
+        <li>For adjustable offset or amplitude, use a potentiometer or a digital potentiometer in the feedback path.</li>
+    </ul>
+
+    <h3>Modulation (Basic AM/FM)</h3>
+    <ul>
+        <li><strong>FM-Like Modulation:</strong> Update frequency register periodically to simulate frequency modulation.</li>
+        <li><strong>AM-Like Modulation:</strong> Use external circuits or amplitude register toggling for amplitude modulation.</li>
+    </ul>
+
+    <h3>User Interface</h3>
+    <ul>
+        <li><strong>Display:</strong> Use a 16x2 LCD or a 0.96" OLED to show frequency, waveform type, and amplitude.</li>
+        <li><strong>Input Controls:</strong> Use buttons or a rotary encoder to adjust frequency and waveform type.</li>
+    </ul>
+
+    <h3>Software / Firmware</h3>
+    <ul>
+        <li>Use Arduino SPI library.</li>
+        <li>Main loop: Read inputs to adjust frequency and waveform type.</li>
+    </ul>
+
+    <h3>Frequency Counter</h3>
+    <ul>
+        <li>Implement a simple frequency counter using Arduino libraries (e.g., FreqCount).</li>
+        <li>For higher frequencies (up to 50 MHz), use external prescaler ICs (costly).</li>
+    </ul>
+</section>
+
+<!-- Components Section -->
+<section id="components">
+    <h2>Components to be used</h2>
+    <table>
+        <tr>
+            <th>Component</th>
+            <th>Quantity</th>
+        </tr>
+        <tr>
+            <td>ESP32</td>
+            <td>1</td>
+        </tr>
+        <tr>
+            <td>16x2 LCD with I2C OR 0.96" OLED</td>
+            <td>1</td>
+        </tr>
+        <tr>
+            <td>Rotary Encoder with Push Button</td>
+            <td>1</td>
+        </tr>
+        <tr>
+            <td>Op Amp (e.g., LM358, TL081)</td>
+            <td>1</td>
+        </tr>
+        <tr>
+            <td>BNC/SMA Connector for Output</td>
+            <td>1</td>
+        </tr>
+        <tr>
+            <td>Miscellaneous Passive Components</td>
+            <td>--</td>
+        </tr>
+        <tr>
+            <td>Tactile Push Buttons</td>
+            <td>2--3</td>
+        </tr>
+        <tr>
+            <td>5V Power Supply</td>
+            <td>1</td>
+        </tr>
+    </table>
+</section>
+
+<!-- Cost-Cutting Section -->
+<section id="costcutting">
+    <h2>Cost-Cutting and Final Notes</h2>
+    <ul>
+        <li>Use simple and affordable components (e.g., push buttons instead of expensive encoders).</li>
+        <li>Opt for commonly available parts in DIY electronics kits.</li>
+        <li>Build the entire system around the ESP32 to reduce costs while maintaining versatility.</li>
+    </ul>
+</section>
+
+<!-- Summary Section -->
+<section id="summary">
+    <h2>Summary</h2>
+    <p>This project provides a cost-effective and versatile function generator capable of generating sine, square, and triangle waveforms. By leveraging the ESP32 and combining software-controlled modulation, signal amplification, and basic frequency counter techniques, it addresses the need for affordable signal-generation tools. This solution offers an educational platform for understanding waveform behavior and signal processing, with applications in prototyping, testing, and debugging. The final design emphasizes modularity, user-friendliness, and adaptability to various use cases.</p>
+</section>
+
+</body>
+</html>
